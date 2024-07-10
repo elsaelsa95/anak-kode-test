@@ -1,6 +1,8 @@
 .header {
   width: 100%;
-  padding: 1% 2%;
+  padding: 1% 10%;
+  position: relative;
+  box-shadow: 1px 1px 15px lightgray;
 }
 
 .container {

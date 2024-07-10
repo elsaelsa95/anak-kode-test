@@ -1,4 +1,5 @@
 import Navbar from "../Navbar";
+import "./index.css"
 
 export interface IChildren {
     children: any
@@ -10,7 +11,7 @@ export default function Layout({ children }: IChildren) {
             <div>
                 <Navbar />
             </div>
-            <main>{children}</main>
+            <main className="main">{children}</main>
         </>
     )
 }

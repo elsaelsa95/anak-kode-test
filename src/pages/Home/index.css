@@ -1,0 +1,58 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 2%;
+}
+
+.section1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2%;
+}
+
+.section1 h1 {
+  font-size: 2.5em;
+}
+
+.section1 strong {
+  color: var(--green);
+}
+
+.section1 p {
+  font-size: 1.5em;
+}
+
+.imageTitle {
+  width: auto;
+}
+
+.section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1% 2%;
+  gap: 2em;
+}
+
+.article {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+
+.imageArticle {
+  width: 50%;
+}
+
+@media (max-width: 600px) {
+  .section1 {
+    flex-direction: column;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,8 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 10%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0 100%),
+    url("/public/image/leaf.png");
+  background-size: cover;
+}
