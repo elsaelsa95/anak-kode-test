@@ -22,32 +22,33 @@ export const DataArticle: IArticle[] = [
     }
 ]
 
-export interface ITop3 {
+export interface IBranding {
     id: number
-    merk: string
-    type: string
-    image: string
+    description: string
+    count: string
 }
-export const DataTop3: ITop3[] = [
+
+export const DataBranding: IBranding[] = [
     {
         id: 1,
-        merk: "Wuling",
-        type: "Air EV",
-        image: "https://wuling.id/assets/images/air-ev/color/xPink.png.pagespeed.ic.gX7Kusuaru.webp",
+        description: "Vehicle Ready",
+        count: "1000+"
     },
     {
         id: 2,
-        merk: "Hyundai",
-        type: "Ionic 5",
-        image: "https://imgcdn.oto.com/large/gallery/exterior/15/2605/hyundai-ioniq-5-front-angle-low-view-395881.jpg",
+        description: "Office in the World",
+        count: "30+"
     },
     {
         id: 3,
-        merk: "Hyundai",
-        type: "Ionic Electric",
-        image: "https://imgx.gridoto.com/crop/0x0:0x0/700x465/photo/2020/01/28/317799328.jpg",
-    }
-
+        description: "Year Warranty is Valid",
+        count: "10+"
+    },
+    {
+        id: 4,
+        description: "Happy Customer",
+        count: "400+"
+    },
 ]
 export interface ICarList {
     id: number
@@ -90,7 +91,7 @@ export const DataCarList: ICarList[] = [
         id: 1,
         merk: "Hyundai",
         type: "Kona Electric",
-        image: "https://www.otoinfo.id/wp-content/uploads/2024/05/Hyundai-Kona-Electric-akan-Segera-diumumkan.jpeg",
+        image: "../image/hyundai-kona-electric.png",
         price: 750000000,
         description: {
             dimention: {
@@ -117,7 +118,7 @@ export const DataCarList: ICarList[] = [
         id: 2,
         merk: "Hyundai",
         type: "Ionic Electric",
-        image: "https://imgx.gridoto.com/crop/0x0:0x0/700x465/photo/2020/01/28/317799328.jpg",
+        image: "../image/hyundai-ionic-electric.png",
         price: 682000000,
         description: {
             dimention: {
@@ -144,8 +145,8 @@ export const DataCarList: ICarList[] = [
         id: 3,
         merk: "Hyundai",
         type: "Ionic 5",
-        image: "https://imgcdn.oto.com/large/gallery/exterior/15/2605/hyundai-ioniq-5-front-angle-low-view-395881.jpg",
-        price: 72000000,
+        image: "../image/hyundai-ioniq-5.png",
+        price: 720000000,
         description: {
             dimention: {
                 length: "4,635 mm",
@@ -171,7 +172,7 @@ export const DataCarList: ICarList[] = [
         id: 4,
         merk: "Wuling",
         type: "Hong Guang MINI EV",
-        image: "https://awsimages.detik.net.id/community/media/visual/2021/04/11/wuling-hong-guang-mini-ev-macaron-4_169.jpeg?w=1200",
+        image: "../image/wuling-hongguang.png",
         price: 152000000,
         description: {
             dimention: {
@@ -198,7 +199,7 @@ export const DataCarList: ICarList[] = [
         id: 5,
         merk: "Wuling",
         type: "Air EV",
-        image: "https://wuling.id/assets/images/air-ev/color/xPink.png.pagespeed.ic.gX7Kusuaru.webp",
+        image: "../image/wuling-air-ev.png",
         price: 190000000,
         description: {
             dimention: {
@@ -225,7 +226,7 @@ export const DataCarList: ICarList[] = [
         id: 6,
         merk: "Lexus",
         type: "UX 300e",
-        image: "https://www.lexus.co.id/content/dam/lexus-v3-blueprint/models/suv/ux/ux-300e/my21/exterior-360/8y6-celestial-blue/31.png",
+        image: "../image/lexus-ux-300e.png",
         price: 1464000000,
         description: {
             dimention: {
@@ -251,8 +252,8 @@ export const DataCarList: ICarList[] = [
     {
         id: 7,
         merk: "Mini Cooper",
-        type: "SE (MINI Electric",
-        image: "https://imgcdn.oto.com/large/gallery/color/26/2616/mini-electric-color-366961.jpg",
+        type: "SE (MINI Electric)",
+        image: "../image/mini-cooper.png",
         price: 1024000000,
         description: {
             dimention: {

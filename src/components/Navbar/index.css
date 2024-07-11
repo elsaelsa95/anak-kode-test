@@ -70,6 +70,10 @@
     justify-content: center;
   }
 
+  .logo {
+    width: 10%;
+  }
+
   .navigationItems {
     position: fixed;
     z-index: 1;

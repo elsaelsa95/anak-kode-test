@@ -2,11 +2,12 @@ import "./index.css"
 
 export interface ICard {
     children: any
+    className?: any
 }
 
-export default function Card({ children }: ICard) {
+export default function Card({ children, className }: ICard) {
     return (
-        <div className="card">
+        <div className={className ? className : "card"}>
             {children}
         </div>
     )

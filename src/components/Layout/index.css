@@ -3,6 +3,12 @@
   flex-direction: column;
   padding: 1% 10%;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0 100%),
-    url("/public/image/leaf.png");
-  background-size: cover;
+    url("/public/image/bg.png");
+  background-size: contain;
+}
+
+@media (max-width: 600px) {
+  .main {
+    background-size: auto;
+  }
 }

@@ -56,17 +56,56 @@ strong {
 
 .section3 {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1% 2%;
+  flex-direction: row;
   gap: 2em;
-  margin-bottom: 2%;
+  margin: 2em;
+  align-items: center;
 }
 
-.slide {
+.section3 p {
+  font-size: 1.5em;
+}
+
+.section3-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10%;
+  width: 100%;
+}
+
+.cardBranding {
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  border-radius: 1em;
+  border: none;
+  background-color: white;
+  box-shadow: 10px 10px 5px lightgray;
+  font-size: 12px;
+}
+
+.section4 {
+  margin-top: 2em;
+}
+
+.description {
+  text-align: start;
+  font-size: 12px;
+}
+
+.description ul {
+  padding-left: 2em;
+  margin-bottom: 1%;
+}
+
+.cardSlide {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+  padding: 5%;
+  border: 1px solid lightgray;
   background-color: none;
-  border-radius: 10%;
+  border-radius: 2%;
   align-items: center;
 }
 
@@ -74,8 +113,13 @@ strong {
   text-align: center;
 }
 
+.imageTop {
+  border-radius: 5%;
+}
+
 @media (max-width: 600px) {
-  .section1 {
+  .section1,
+  .section3 {
     flex-direction: column;
   }
 
@@ -86,5 +130,16 @@ strong {
   .article {
     display: flex;
     flex-direction: column;
+  }
+
+  .section3-card,
+  .cardSlide {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .description {
+    padding-left: 5%;
   }
 }
