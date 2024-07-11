@@ -1,24 +1,11 @@
 import Card from "../../components/Card"
+import { DataArticle, DataTop3 } from "../../data/data"
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 import "./index.css"
 
 export default function Home() {
-    const article = [
-        {
-            title: "Reduce Noise Pollution",
-            description: "The electric engine in a car works with electricity which does not produce the noisy sound of an internal combustion engine.",
-            image: "../image/noise.png"
-        },
-        {
-            title: "Reduce Air Pollution",
-            description: "Electric cars do not produce carbon dioxide emissions and other gases that contribute to global warming and climate change.",
-            image: "../image/pollution.png"
-        },
-        {
-            title: "Reduce the Use of Fuel",
-            description: "Electric cars can reduce dependence on increasingly limited fuel oil.",
-            image: "../image/fuel.png"
-        }
-    ]
     return (
         <div className="section">
             <div className="top">
@@ -30,20 +17,35 @@ export default function Home() {
                     <img src="../image/car.png" alt="logo" className="imageTitle" />
                 </div>
                 <div className="section2">
-                    <div className="benefit">
-                        <h1>If you use an electric car, you contribute to:</h1>
+                    <div className="titleSection">
+                        <h1>Why <strong>Electric </strong> Car ?</h1>
                     </div>
                     <div className="article">
-                        {article.map((a, i) => {
+                        {DataArticle.map((a, i) => {
                             return (
                                 <Card key={i}>
                                     <h3>{a.title}</h3>
                                     <p> {a.description}</p>
-                                    <img src={a.image} className="imageArticle" />
+                                    <img src={a.image} className="imageArticle" alt={a.title} />
                                 </Card>
                             )
                         })}
                     </div>
+                </div>
+                <div className="section3">
+                    <div className="titleSection">
+                        <h1>Top 3 <strong>Electric </strong>Car of the Month's</h1>
+                    </div>
+                    <Carousel>
+                        {DataTop3.map((t, i) => {
+                            return (
+                                <div className="slide">
+                                    <img src={t.image} className="imageArticle" alt={t.type} />
+                                    <h3> {t.merk} <strong>{t.type}</strong></h3>
+                                </div>
+                            )
+                        })}
+                    </Carousel>
                 </div>
             </div>
         </div >

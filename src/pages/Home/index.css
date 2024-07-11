@@ -9,14 +9,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 2%;
+  gap: 2em;
+  margin-bottom: 2%;
+}
+
+.titleSection h1 {
+  font-size: 2em;
+  text-align: center;
 }
 
 .section1 h1 {
   font-size: 2.5em;
 }
 
-.section1 strong {
+strong {
   color: var(--green);
 }
 
@@ -34,6 +40,7 @@
   align-items: center;
   padding: 1% 2%;
   gap: 2em;
+  margin-bottom: 2%;
 }
 
 .article {
@@ -44,11 +51,36 @@
 
 .imageArticle {
   width: 50%;
+  height: auto;
+}
+
+.section3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1% 2%;
+  gap: 2em;
+  margin-bottom: 2%;
+}
+
+.slide {
+  background-color: none;
+  border-radius: 10%;
+  align-items: center;
+}
+
+.carousel {
+  text-align: center;
 }
 
 @media (max-width: 600px) {
   .section1 {
     flex-direction: column;
+  }
+
+  .titleSection h1 {
+    font-size: 1.8em;
   }
 
   .article {
