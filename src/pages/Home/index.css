@@ -117,6 +117,29 @@ strong {
   border-radius: 5%;
 }
 
+.table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.from,
+.to {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border: 0.1px solid lightgray;
+  border-radius: 1em;
+  background-color: var(--white);
+  min-height: 80%;
+}
+
 @media (max-width: 600px) {
   .section1,
   .section3 {
@@ -141,5 +164,10 @@ strong {
 
   .description {
     padding-left: 5%;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: column;
   }
 }

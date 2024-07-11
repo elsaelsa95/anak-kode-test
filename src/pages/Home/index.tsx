@@ -5,12 +5,61 @@ import { Carousel } from 'react-responsive-carousel';
 
 import "./index.css"
 import Button from "../../components/Button";
+import Filter from "../../components/Filter";
+// import { useEffect, useState } from "react";
+
+export interface IFilterProvince {
+    province_id: string
+    province: string
+}
+
+export interface IFilterCity {
+    city_id: string
+    province_id: string
+    province: string
+    type: string
+    city_name: string
+    postal_code: string
+}
+
+export interface IResultOngkir {
+    value: number
+    etd: string
+}
 
 export default function Home() {
     const formatter = (number: number) => new Intl.NumberFormat('id-ID', {
         style: "currency",
         currency: "IDR"
     }).format(number)
+
+    // const [dataProvince, setDataProvince] = useState<IFilterProvince[]>([])
+    // const [dataCity, setDataCity] = useState<IFilterCity[]>([])
+    // const [result, setResult] = useState<IResultOngkir[]>([])
+
+    // const getProvince: any = async () => {
+    //     try {
+    //         const response = await fetch(`https://api.rajaongkir.com/starter/province`, {
+    //             method: "GET",
+    //             // mode: "no-cors",
+    //             headers: {
+    //                 // 'Content-Type': 'application/json',
+    //                 // "Access-Control-Allow-Origin": "*",
+    //                 // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    //                 // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    //                 'key': `${process.env.Key_Raja_Ongkir}`
+    //             }
+    //         })
+    //         console.log(response)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getProvince()
+    // }, [])
+    // getProvince()
 
     return (
         <div className="section">
@@ -60,10 +109,10 @@ export default function Home() {
                 <div className="titleSection">
                     <h1>Find the<strong> Best </strong>Deal for You</h1>
                 </div>
-                <Carousel>
+                <Carousel showThumbs={false}>
                     {DataCarList.map((c, i) => {
                         return (
-                            <div className="cardSlide">
+                            <div className="cardSlide" key={i}>
                                 <div>
                                     <img src={c.image} className="imageTop" alt={c.type} />
                                 </div>
@@ -98,6 +147,42 @@ export default function Home() {
                         )
                     })}
                 </Carousel>
+            </section>
+            <section className="section5">
+                <div className="titleSection">
+                    <h1>Check<strong> Shipping Cost </strong></h1>
+                </div>
+                <div className="table">
+                    <div className="from">
+                        <strong>From</strong>
+                        <Filter
+                            label="Choose Province"
+                            data={["Bali", "Bogor"]}
+                        />
+                        <Filter
+                            label="Choose City"
+                            data={["Bali", "Bogor"]}
+                        />
+                    </div>
+                    <div className="to">
+                        <strong>To</strong>
+                        <Filter
+                            label="Choose Province"
+                            data={["Bali", "Bogor"]}
+                        />
+                        <Filter
+                            label="Choose City"
+                            data={["Bali", "Bogor"]}
+                        />
+                    </div>
+                    <div>
+                        <strong>Estimation</strong>
+                        <div className="result">
+
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </div>
     )
