@@ -1,6 +1,7 @@
 import { MouseEventHandler } from "react";
-import { Link, useLocation } from "react-router-dom";
-import "../index.css"
+import style from "../style.module.css"
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Navigation({
     isOpen,
@@ -9,8 +10,8 @@ export default function Navigation({
     isOpen?: boolean;
     onClick?: MouseEventHandler;
 }) {
-    const location = useLocation()
-    const path = location.pathname
+
+    const path = usePathname();
 
     let navigationItems = [
         {
@@ -32,14 +33,14 @@ export default function Navigation({
 
     return (
         <div
-            className="navigationItems"
+            className={style.navigationItems}
             data-is-open={isOpen}
         >
             {navigationItems.map((m, i) => {
                 return (
                     <Link
                         key={i}
-                        to={m.link}
+                        href={m.link}
                         title={m.pageName}
                         data-is-active={m.isActive}
                         onClick={onClick}

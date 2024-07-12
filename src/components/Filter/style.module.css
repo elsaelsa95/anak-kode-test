@@ -18,10 +18,15 @@
   padding: 1em;
   border: 0.1px solid lightgray;
   background-color: var(--white);
+  border-radius: 1em;
 }
 
 .hide {
   display: none;
+}
+
+.option {
+  cursor: pointer;
 }
 
 .option:hover {

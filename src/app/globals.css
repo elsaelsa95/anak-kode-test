@@ -21,7 +21,18 @@ body {
 }
 
 main {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  padding: 1% 10%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0 100%),
+    url("/image/bg.png");
+  background-size: contain;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 1% 5%;
+    background-size: auto;
+  }
 }

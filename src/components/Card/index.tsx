@@ -1,4 +1,4 @@
-import "./index.css"
+import style from "./style.module.css"
 
 export interface ICard {
     children: any
@@ -7,8 +7,6 @@ export interface ICard {
 
 export default function Card({ children, className }: ICard) {
     return (
-        <div className={className ? className : "card"}>
-            {children}
-        </div>
+        <div className={className ? className : style.card}>{children}</div>
     )
 }

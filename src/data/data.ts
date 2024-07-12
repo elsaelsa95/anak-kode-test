@@ -8,17 +8,17 @@ export const DataArticle: IArticle[] = [
     {
         title: "Reduce Noise Pollution",
         description: "The electric engine in a car works with electricity which does not produce the noisy sound of an internal combustion engine.",
-        image: "../image/noise.png"
+        image: "/image/noise.png"
     },
     {
         title: "Reduce Air Pollution",
         description: "Electric cars do not produce carbon dioxide emissions and other gases that contribute to global warming and climate change.",
-        image: "../image/pollution.png"
+        image: "/image/pollution.png"
     },
     {
         title: "Reduce the Use of Fuel",
         description: "Electric cars can reduce dependence on increasingly limited fuel oil.",
-        image: "../image/fuel.png"
+        image: "/image/fuel.png"
     }
 ]
 
@@ -91,7 +91,7 @@ export const DataCarList: ICarList[] = [
         id: 1,
         merk: "Hyundai",
         type: "Kona Electric",
-        image: "../image/hyundai-kona-electric.png",
+        image: "/image/hyundai-kona-electric.png",
         price: 750000000,
         description: {
             dimention: {
@@ -118,7 +118,7 @@ export const DataCarList: ICarList[] = [
         id: 2,
         merk: "Hyundai",
         type: "Ionic Electric",
-        image: "../image/hyundai-ionic-electric.png",
+        image: "/image/hyundai-ionic-electric.png",
         price: 682000000,
         description: {
             dimention: {
@@ -145,7 +145,7 @@ export const DataCarList: ICarList[] = [
         id: 3,
         merk: "Hyundai",
         type: "Ionic 5",
-        image: "../image/hyundai-ioniq-5.png",
+        image: "/image/hyundai-ioniq-5.png",
         price: 720000000,
         description: {
             dimention: {
@@ -172,7 +172,7 @@ export const DataCarList: ICarList[] = [
         id: 4,
         merk: "Wuling",
         type: "Hong Guang MINI EV",
-        image: "../image/wuling-hongguang.png",
+        image: "/image/wuling-hongguang.png",
         price: 152000000,
         description: {
             dimention: {
@@ -199,7 +199,7 @@ export const DataCarList: ICarList[] = [
         id: 5,
         merk: "Wuling",
         type: "Air EV",
-        image: "../image/wuling-air-ev.png",
+        image: "/image/wuling-air-ev.png",
         price: 190000000,
         description: {
             dimention: {
@@ -226,7 +226,7 @@ export const DataCarList: ICarList[] = [
         id: 6,
         merk: "Lexus",
         type: "UX 300e",
-        image: "../image/lexus-ux-300e.png",
+        image: "/image/lexus-ux-300e.png",
         price: 1464000000,
         description: {
             dimention: {
@@ -253,7 +253,7 @@ export const DataCarList: ICarList[] = [
         id: 7,
         merk: "Mini Cooper",
         type: "SE (MINI Electric)",
-        image: "../image/mini-cooper.png",
+        image: "/image/mini-cooper.png",
         price: 1024000000,
         description: {
             dimention: {

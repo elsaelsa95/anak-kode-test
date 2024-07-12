@@ -22,7 +22,7 @@
   font-size: 2.5em;
 }
 
-strong {
+.strong {
   color: var(--green);
 }
 
@@ -31,7 +31,10 @@ strong {
 }
 
 .imageTitle {
-  width: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
 }
 
 .section2 {
@@ -66,7 +69,7 @@ strong {
   font-size: 1.5em;
 }
 
-.section3-card {
+.section3Card {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10%;
@@ -85,7 +88,7 @@ strong {
 }
 
 .section4 {
-  margin-top: 2em;
+  margin: 2em 0;
 }
 
 .description {
@@ -107,14 +110,16 @@ strong {
   background-color: none;
   border-radius: 2%;
   align-items: center;
+  min-height: 100%;
 }
 
 .carousel {
   text-align: center;
 }
 
-.imageTop {
+.imageCar {
   border-radius: 5%;
+  width: 100%;
 }
 
 .table {
@@ -124,20 +129,23 @@ strong {
 }
 
 .from,
-.to {
+.to,
+.count {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding-left: 3%;
 }
 
 .result {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding-left: 5%;
   border: 0.1px solid lightgray;
   border-radius: 1em;
   background-color: var(--white);
-  min-height: 80%;
+  min-height: 5em;
 }
 
 @media (max-width: 600px) {
@@ -155,7 +163,7 @@ strong {
     flex-direction: column;
   }
 
-  .section3-card,
+  .section3Card,
   .cardSlide {
     display: flex;
     flex-direction: column;

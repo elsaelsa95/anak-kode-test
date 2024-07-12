@@ -1,25 +1,27 @@
-import { Link } from "react-router-dom"
-import "./index.css"
+'use client'
+
+import style from "./style.module.css"
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import Navigation from "./Navigation"
+import Link from "next/link"
 
 export default function Navbar() {
     const [isOpenMobileNav, setIsOpenMobileNav] = useState(false)
 
     return (
-        <div className="header" data-is-open={isOpenMobileNav}>
-            <nav className="container">
+        <div className={style.header} data-is-open={isOpenMobileNav}>
+            <nav className={style.container}>
                 <FontAwesomeIcon
                     icon={faBars}
-                    className="mobileBars"
+                    className={style.mobileBars}
                     onClick={(_) => setIsOpenMobileNav((prev) => !prev)}
                 />
-                <Link to={"/"} className="navLogo">
-                    <img src="../image/leaf.png" alt="logo" className="logo" />
+                <Link href={"/"} className={style.navLogo}>
+                    <img src="../image/leaf.png" alt="logo" className={style.logo} />
                 </Link>
-                <div className="navigation">
+                <div className={style.navigation}>
                     <Navigation
                         isOpen={isOpenMobileNav}
                         onClick={(_) => setIsOpenMobileNav(false)}

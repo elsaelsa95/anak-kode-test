@@ -1,5 +1,4 @@
-
-import "./index.css"
+import style from "./style.module.css"
 export interface IButton {
     onClick?: () => void
     children: string
@@ -8,8 +7,6 @@ export interface IButton {
 
 export default function Button({ onClick, children, className }: IButton) {
     return (
-        <>
-            <button onClick={onClick} className={className ? className : "button"}>{children}</button>
-        </>
+        <button onClick={onClick} className={className ? className : style.button}>{children}</button>
     )
 }
