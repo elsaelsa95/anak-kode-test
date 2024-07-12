@@ -14,7 +14,6 @@
 .show {
   display: flex;
   flex-direction: column;
-  list-style: none;
   padding: 1em;
   border: 0.1px solid lightgray;
   background-color: var(--white);

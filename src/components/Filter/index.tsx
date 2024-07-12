@@ -7,33 +7,20 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons"
 
 export interface IFilter {
     label: string
-    data: string[]
+    children: any
+    open: boolean
+    onClick: () => void
 }
-export default function Filter({ label, data }: IFilter) {
-    const [openFilter, setOpenFilter] = useState(false)
-    const [labelFilter, setLabelfilter] = useState("")
-
+export default function Filter({ label, children, open, onClick }: IFilter) {
     return (
         <div>
-            <div className={style.filter} onClick={() => setOpenFilter(!openFilter)}>
-                <label>{labelFilter ? labelFilter : label}</label>
-                <FontAwesomeIcon icon={faFilter} />
+            <div className={style.filter}>
+                <label>{label}</label>
+                <FontAwesomeIcon icon={faFilter} onClick={onClick} />
             </div>
-            <ul className={openFilter ? style.show : style.hide}>
-                {data.map((d, i) => {
-                    return (
-                        <li
-                            key={i}
-                            className={style.option}
-                            onClick={() => {
-                                setLabelfilter(d)
-                                setOpenFilter(!openFilter)
-                            }}
-                        >{d}
-                        </li>
-                    )
-                })}
-            </ul>
+            <div className={open ? style.show : style.hide}>
+                {children}
+            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  padding: 1% 2%;
+  padding: 1% 5%;
 }
 
 .section1 {
@@ -120,32 +120,6 @@
 .imageCar {
   border-radius: 5%;
   width: 100%;
-}
-
-.table {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
-}
-
-.from,
-.to,
-.count {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding-left: 3%;
-}
-
-.result {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding-left: 5%;
-  border: 0.1px solid lightgray;
-  border-radius: 1em;
-  background-color: var(--white);
-  min-height: 5em;
 }
 
 @media (max-width: 600px) {
