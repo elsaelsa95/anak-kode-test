@@ -8,7 +8,7 @@ import { DataArticle, DataBranding, DataCarList } from "@/data/data";
 import Card from "@/components/Card";
 import RootLayout from "./layout";
 import Form from "@/components/Form";
-import { useEffect, useState } from "react";
+import store from "@/redux/store";
 
 export default function Home({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
   const formatter = (number: number) => new Intl.NumberFormat('id-ID', {
@@ -25,6 +25,8 @@ export default function Home({ listProvince, listCityFrom, listCityTo, estimatio
     )
   })
 
+  const local = store.getState()
+  console.log(local)
   return (
     <RootLayout>
       <div className={style.section}>
@@ -130,6 +132,9 @@ export default function Home({ listProvince, listCityFrom, listCityTo, estimatio
 }
 
 export const getServerSideProps = async () => {
+  const local = store.getState()
+  console.log(local)
+
   const getProvince = await fetch(`http://api.rajaongkir.com/starter/province`, {
     headers: {
       'key': `${process.env.KEY_RAJA_ONGKIR}`
@@ -137,8 +142,7 @@ export const getServerSideProps = async () => {
   })
   const listProvince = await getProvince.json()
 
-  const provinceIDFrom = 1
-
+  const provinceIDFrom = local.provinceSlice.provinceIDfrom
   const getCityFrom = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDFrom}`, {
     headers: {
       'content-type': "application/x-www-form-urlencoded",
@@ -147,14 +151,13 @@ export const getServerSideProps = async () => {
   })
   const listCityFrom = await getCityFrom.json()
 
-  const provinceIDTo = 10
+  const provinceIDTo = local.provinceSlice.provinceIDTo
   const getCityTo = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDTo}`, {
     headers: {
       'key': `${process.env.KEY_RAJA_ONGKIR}`
     }
   })
   const listCityTo = await getCityTo.json()
-
 
   const getCost = await fetch(`https://api.rajaongkir.com/starter/cost`, {
     method: "POST",
@@ -163,8 +166,8 @@ export const getServerSideProps = async () => {
       'key': `${process.env.KEY_RAJA_ONGKIR}`
     },
     body: JSON.stringify({
-      "origin": "501",
-      "destination": "114",
+      "origin": local.citySlice.cityIDFrom,
+      "destination": local.citySlice.cityIDTo,
       "weight": "1700",
       "courier": "jne"
     })
