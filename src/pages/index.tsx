@@ -9,6 +9,7 @@ import Card from "@/components/Card";
 import RootLayout from "./layout";
 import Form from "@/components/Form";
 import store from "@/redux/store";
+import { dataCost, dataListCity, dataListProvince } from "@/data/rajaongkir";
 
 export default function Home({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
   const formatter = (number: number) => new Intl.NumberFormat('id-ID', {
@@ -16,10 +17,19 @@ export default function Home({ listProvince, listCityFrom, listCityTo, estimatio
     currency: "IDR"
   }).format(number)
 
-  const province = listProvince.rajaongkir.results
-  const fromCity = listCityFrom.rajaongkir.results
-  const toCity = listCityTo.rajaongkir.results
-  const cost = estimationCost.rajaongkir.results.map((c: any) => {
+  // const province = listProvince.rajaongkir.results
+  // const fromCity = listCityFrom.rajaongkir.results
+  // const toCity = listCityTo.rajaongkir.results
+  // const cost = estimationCost.rajaongkir.results.map((c: any) => {
+  //   return (
+  //     c.costs
+  //   )
+  // })
+
+  const province = dataListProvince.rajaongkir.results
+  const fromCity = dataListCity.rajaongkir.results
+  const toCity = dataListCity.rajaongkir.results
+  const cost = dataCost.rajaongkir.results.map((c: any) => {
     return (
       c.costs
     )
@@ -131,56 +141,56 @@ export default function Home({ listProvince, listCityFrom, listCityTo, estimatio
   )
 }
 
-export const getServerSideProps = async () => {
-  const local = store.getState()
-  console.log(local)
+// export const getServerSideProps = async () => {
+//   const local = store.getState()
+//   console.log(local)
 
-  const getProvince = await fetch(`http://api.rajaongkir.com/starter/province`, {
-    headers: {
-      'key': `${process.env.KEY_RAJA_ONGKIR}`
-    }
-  })
-  const listProvince = await getProvince.json()
+//   const getProvince = await fetch(`http://api.rajaongkir.com/starter/province`, {
+//     headers: {
+//       'key': `${process.env.KEY_RAJA_ONGKIR}`
+//     }
+//   })
+//   const listProvince = await getProvince.json()
 
-  const provinceIDFrom = local.provinceSlice.provinceIDfrom
-  const getCityFrom = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDFrom}`, {
-    headers: {
-      'content-type': "application/x-www-form-urlencoded",
-      'key': `${process.env.KEY_RAJA_ONGKIR}`
-    }
-  })
-  const listCityFrom = await getCityFrom.json()
+//   const provinceIDFrom = local.provinceSlice.provinceIDfrom
+//   const getCityFrom = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDFrom}`, {
+//     headers: {
+//       'content-type': "application/x-www-form-urlencoded",
+//       'key': `${process.env.KEY_RAJA_ONGKIR}`
+//     }
+//   })
+//   const listCityFrom = await getCityFrom.json()
 
-  const provinceIDTo = local.provinceSlice.provinceIDTo
-  const getCityTo = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDTo}`, {
-    headers: {
-      'key': `${process.env.KEY_RAJA_ONGKIR}`
-    }
-  })
-  const listCityTo = await getCityTo.json()
+//   const provinceIDTo = local.provinceSlice.provinceIDTo
+//   const getCityTo = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDTo}`, {
+//     headers: {
+//       'key': `${process.env.KEY_RAJA_ONGKIR}`
+//     }
+//   })
+//   const listCityTo = await getCityTo.json()
 
-  const getCost = await fetch(`https://api.rajaongkir.com/starter/cost`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      'key': `${process.env.KEY_RAJA_ONGKIR}`
-    },
-    body: JSON.stringify({
-      "origin": local.citySlice.cityIDFrom,
-      "destination": local.citySlice.cityIDTo,
-      "weight": "1700",
-      "courier": "jne"
-    })
-  })
+//   const getCost = await fetch(`https://api.rajaongkir.com/starter/cost`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       'key': `${process.env.KEY_RAJA_ONGKIR}`
+//     },
+//     body: JSON.stringify({
+//       "origin": local.citySlice.cityIDFrom,
+//       "destination": local.citySlice.cityIDTo,
+//       "weight": "1700",
+//       "courier": "jne"
+//     })
+//   })
 
-  const estimationCost = await getCost.json()
+//   const estimationCost = await getCost.json()
 
-  return {
-    props: {
-      listProvince,
-      listCityFrom,
-      listCityTo,
-      estimationCost
-    }
-  }
-}
+//   return {
+//     props: {
+//       listProvince,
+//       listCityFrom,
+//       listCityTo,
+//       estimationCost
+//     }
+//   }
+// }

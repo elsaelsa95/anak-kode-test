@@ -29,9 +29,13 @@ export default function RootLayout({
         //         </main>
         //     </body>
         // </html>
-        <>
-            <Navbar />
-            {children}
-        </>
+        <html>
+            <body>
+                <Navbar />
+                <main>
+                    {children}
+                </main>
+            </body>
+        </html>
     );
 }
