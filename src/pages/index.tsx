@@ -10,7 +10,7 @@ import RootLayout from "./layout";
 import Form from "@/components/Form";
 import { useEffect, useState } from "react";
 
-export default function Home({ listProvince, listCityFrom, listCityTo }: any) {
+export default function Home({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
   const formatter = (number: number) => new Intl.NumberFormat('id-ID', {
     style: "currency",
     currency: "IDR"
@@ -19,6 +19,11 @@ export default function Home({ listProvince, listCityFrom, listCityTo }: any) {
   const province = listProvince.rajaongkir.results
   const fromCity = listCityFrom.rajaongkir.results
   const toCity = listCityTo.rajaongkir.results
+  const cost = estimationCost.rajaongkir.results.map((c: any) => {
+    return (
+      c.costs
+    )
+  })
 
   return (
     <RootLayout>
@@ -116,6 +121,7 @@ export default function Home({ listProvince, listCityFrom, listCityTo }: any) {
             listProvince={province}
             listCityFrom={fromCity}
             listCityTo={toCity}
+            estimationCost={cost}
           />
         </section>
       </div>
@@ -124,10 +130,8 @@ export default function Home({ listProvince, listCityFrom, listCityTo }: any) {
 }
 
 export const getServerSideProps = async () => {
-
   const getProvince = await fetch(`http://api.rajaongkir.com/starter/province`, {
     headers: {
-      'content-type': "application/x-www-form-urlencoded",
       'key': `${process.env.KEY_RAJA_ONGKIR}`
     }
   })
@@ -146,17 +150,34 @@ export const getServerSideProps = async () => {
   const provinceIDTo = 10
   const getCityTo = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDTo}`, {
     headers: {
-      'content-type': "application/x-www-form-urlencoded",
       'key': `${process.env.KEY_RAJA_ONGKIR}`
     }
   })
   const listCityTo = await getCityTo.json()
 
+
+  const getCost = await fetch(`https://api.rajaongkir.com/starter/cost`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'key': `${process.env.KEY_RAJA_ONGKIR}`
+    },
+    body: JSON.stringify({
+      "origin": "501",
+      "destination": "114",
+      "weight": "1700",
+      "courier": "jne"
+    })
+  })
+
+  const estimationCost = await getCost.json()
+
   return {
     props: {
       listProvince,
       listCityFrom,
-      listCityTo
+      listCityTo,
+      estimationCost
     }
   }
 }

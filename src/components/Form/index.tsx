@@ -3,7 +3,7 @@ import { useState } from "react"
 import style from "./style.module.css"
 import Filter from "../Filter"
 
-export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
+export default function Form({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
     const [openProvinceFrom, setOpenProvinceFrom] = useState(false)
     const [provinceIDFrom, setProvinceIDFrom] = useState("")
     const [provinceFrom, setProvinceFrom] = useState("")
@@ -38,6 +38,7 @@ export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
                                         setProvinceIDFrom(p.province_id)
                                         setProvinceFrom(p.province)
                                         setOpenProvinceFrom(!openProvinceFrom)
+                                        localStorage.setItem("provinceIDFrom", p.province_id)
                                     }}>{p.province}
                                 </li>
                             </ul>
@@ -58,6 +59,7 @@ export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
                                         setCityIDFrom(c.city_id)
                                         setCityFrom(c.city_name)
                                         setOpenCityFrom(!openCityFrom)
+                                        localStorage.setItem("cityIIDFrom", c.city_id)
                                     }}>{c.city_name}
                                 </li>
                             </ul>
@@ -81,6 +83,7 @@ export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
                                         setProvinceIDTo(p.province_id)
                                         setProvinceTo(p.province)
                                         setOpenProvinceTo(!openProvinceTo)
+                                        localStorage.setItem("provinceIDTo", p.province_id)
                                     }}>{p.province}
                                 </li>
                             </ul>
@@ -101,6 +104,7 @@ export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
                                         setCityIDTo(c.city_id)
                                         setCityTo(c.city_name)
                                         setOpenCityTo(!openCityTo)
+                                        localStorage.setItem("cityIDTo", c.city_id)
                                     }}>{c.city_name}
                                 </li>
                             </ul>
@@ -111,6 +115,22 @@ export default function Form({ listProvince, listCityFrom, listCityTo }: any) {
             <div className={style.count}>
                 <strong className={style.strong}>Estimation</strong>
                 <div className={style.result}>
+                    {estimationCost[0].map((c: any) => {
+                        return (
+                            <div>
+                                <p>Service : {c.service}</p>
+                                <p>Description: {c.description}</p>
+                                {c.cost.map((c: any, i: any) => {
+                                    return (
+                                        <>
+                                            <p> Estimation Cost : {c.value}</p>
+                                            <p> Estimation ETD : {c.etd}</p>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </div>
