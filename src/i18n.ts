@@ -38,7 +38,9 @@ i18n.use(initReactI18next).init({
                 etd: "Estimation ETD ",
                 carWeight: "*Estimation Car Weight = 2.700 kg ",
                 courier: "*Service Available = JNE ",
-                checkCost: "Check"
+                checkCost: "Check ",
+                findUs: "Find Us ",
+                contactUs: "Contact Us "
             },
         },
         ind: {
@@ -70,7 +72,9 @@ i18n.use(initReactI18next).init({
                 etd: "Estimasi ETD ",
                 carWeight: "*Estimati Berat Mobil = 2.700 kg",
                 courier: "*Layanan Tersedia = JNE ",
-                checkCost: "Cek Tarif"
+                checkCost: "Cek Tarif ",
+                findUs: "Termukan Kami ",
+                contactUs: "Hubungi Kami "
             },
         },
     },

@@ -1,7 +1,6 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
 import style from "./style.module.css"
 import { faFilter } from "@fortawesome/free-solid-svg-icons"
 
