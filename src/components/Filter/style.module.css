@@ -1,0 +1,34 @@
+.filter {
+  width: 100%;
+  height: 2em;
+  border: 0.1px solid lightgray;
+  border-radius: 1em;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  gap: 1em;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 0.1px solid lightgray;
+  background-color: var(--white);
+  border-radius: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+.option {
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: var(--green);
+  color: var(--white);
+}

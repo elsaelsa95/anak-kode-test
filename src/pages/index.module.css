@@ -1,0 +1,185 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 5%;
+}
+
+.section1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  margin-bottom: 2%;
+  animation: slideRight 1s ease-in-out;
+}
+
+.titleSection h1 {
+  font-size: 2em;
+  text-align: center;
+}
+
+.section1 h1 {
+  font-size: 2.5em;
+}
+
+.strong {
+  color: var(--green);
+}
+
+.section1 p {
+  font-size: 1.5em;
+}
+
+.imageTitle {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+}
+
+.section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1% 2%;
+  gap: 2em;
+  margin-bottom: 2%;
+  animation: slideLeft 1s ease-in-out;
+}
+
+.article {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+
+.imageArticle {
+  width: 50%;
+  height: auto;
+}
+
+.section3 {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  margin: 2em;
+  align-items: center;
+  animation: slideRight 1s ease-in-out;
+}
+
+.section3 p {
+  font-size: 1.5em;
+}
+
+.section3Card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10%;
+  width: 100%;
+}
+
+.cardBranding {
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  border-radius: 1em;
+  border: none;
+  background-color: white;
+  box-shadow: 10px 10px 5px lightgray;
+  font-size: 12px;
+}
+
+.section4 {
+  margin: 2em 0;
+  animation: slideLeft 1s ease-in-out;
+}
+
+.description {
+  text-align: start;
+  font-size: 12px;
+}
+
+.description ul {
+  padding-left: 2em;
+  margin-bottom: 1%;
+}
+
+.cardSlide {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+  padding: 5%;
+  border: 1px solid lightgray;
+  background-color: none;
+  border-radius: 2%;
+  align-items: center;
+  min-height: 100%;
+}
+
+.carousel {
+  text-align: center;
+}
+
+.imageCar {
+  border-radius: 5%;
+  width: 100%;
+}
+
+.section5 {
+  animation: slideRight 1s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  .section1,
+  .section3 {
+    flex-direction: column;
+  }
+
+  .titleSection h1 {
+    font-size: 1.8em;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section3Card,
+  .cardSlide {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .description {
+    padding-left: 5%;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
