@@ -4,6 +4,7 @@ import style from "./style.module.css"
 import Filter from "../Filter"
 import Button from "../Button";
 import { formatter } from "@/helper/formatCurrency";
+import { useTranslation } from "react-i18next";
 export interface IListCity {
     province_id: string;
     city_id: string;
@@ -98,13 +99,14 @@ export default function Form({ listProvince }: any) {
         }
     }
 
+    const { t } = useTranslation();
     return (
         <div className={style.table}>
             <div className={style.from}>
-                <strong className={style.strong}>From</strong>
+                <strong className={style.strong}>{t("from")}</strong>
                 <Filter
                     onClick={() => setOpenProvinceFrom(!openProvinceFrom)}
-                    label={provinceFrom ? provinceFrom : "Choose Province"}
+                    label={provinceFrom ? provinceFrom : t("chooseProvince")}
                     open={openProvinceFrom}>
                     {listProvince.map((p: any, i: any) => {
                         return (
@@ -127,7 +129,7 @@ export default function Form({ listProvince }: any) {
                 {showFromCityForm ?
                     <Filter
                         onClick={() => setOpenCityFrom(!openCityFrom)}
-                        label={cityFrom ? cityFrom : "Choose City"}
+                        label={cityFrom ? cityFrom : t("chooseCity")}
                         open={openCityFrom}>
                         {listFromCity.map((c: any, i: any) => {
                             return (
@@ -149,10 +151,10 @@ export default function Form({ listProvince }: any) {
                 }
             </div>
             <div className={style.to}>
-                <strong className={style.strong}>To</strong>
+                <strong className={style.strong}>{t("to")}</strong>
                 <Filter
                     onClick={() => setOpenProvinceTo(!openProvinceTo)}
-                    label={provinceTo ? provinceTo : "Choose Province"}
+                    label={provinceTo ? provinceTo : t("chooseProvince")}
                     open={openProvinceTo}>
                     {listProvince.map((p: any, i: any) => {
                         return (
@@ -175,7 +177,7 @@ export default function Form({ listProvince }: any) {
                 {showToCityForm ?
                     <Filter
                         onClick={() => setOpenCityTo(!openCityTo)}
-                        label={cityTo ? cityTo : "Choose City"}
+                        label={cityTo ? cityTo : t("chooseCity")}
                         open={openCityTo}>
                         {listToCity.map((c: any, i: any) => {
                             return (
@@ -198,18 +200,18 @@ export default function Form({ listProvince }: any) {
 
             {cost ?
                 <div className={style.count}>
-                    <strong className={style.strong}>Estimation</strong>
+                    <strong className={style.strong}>{t("estimation")}</strong>
                     <div className={style.result}>
                         {cost.map((c: any, i: any) => {
                             return (
                                 <div key={i}>
-                                    <p>Service : {c.service}</p>
-                                    <p>Description: {c.description}</p>
+                                    <p> {t("service")} : {c.service}</p>
+                                    <p>{t("description")}: {c.description}</p>
                                     {c.cost.map((c: any, i: any) => {
                                         return (
                                             <div key={i}>
-                                                <p> Estimation Cost : {formatter(c.value)}</p>
-                                                <p> Estimation ETD : {c.etd}</p>
+                                                <p> {t("estimationCost")} : {formatter(c.value)}</p>
+                                                <p> {t("etd")}  : {c.etd}</p>
                                             </div>
                                         )
                                     })}
@@ -219,10 +221,10 @@ export default function Form({ listProvince }: any) {
                     </div>
                 </div> : <></>
             }
-            <p><strong>*Estimation Car Weight = 2.700 kg</strong></p>
-            <p><strong>*Service Available = JNE</strong>
+            <p><strong>{t("carWeight")}</strong></p>
+            <p><strong>{t("courier")}</strong>
             </p>
-            <Button onClick={() => checkCost()}>Check</Button>
+            <Button onClick={() => checkCost()}>{t("checkCost")}</Button>
         </div>
     )
 }

@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   padding: 10%;
   height: 100%;
   gap: 1.5em;
@@ -13,7 +14,4 @@
 }
 
 @media (max-width: 600px) {
-  .card {
-    text-align: center;
-  }
 }

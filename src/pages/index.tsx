@@ -4,12 +4,13 @@ import style from "./index.module.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Button from "@/components/Button";
-import { DataArticle, DataBranding, DataCarList } from "@/data/data";
+import { DataArticleEnglish, DataArticleIndonesian, DataBrandingEnglish, DataBrandingIndonesian, DataCarList } from "@/data/data";
 import Card from "@/components/Card";
 import RootLayout from "./layout";
 import Form from "@/components/Form";
 import { useEffect, useState } from "react";
 import { formatter } from "@/helper/formatCurrency";
+import { useTranslation } from "react-i18next";
 
 export interface IProvince {
   province_id: string;
@@ -28,22 +29,40 @@ export default function Home() {
       });
   }, []);
 
+  const { t } = useTranslation();
+
+  let DataArticle = DataArticleEnglish;
+  let DataBranding = DataBrandingEnglish;
+
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem("selectedLanguage") == "ind") {
+      DataArticle = DataArticleIndonesian
+      DataBranding = DataBrandingIndonesian
+    }
+  }
+
   return (
     <RootLayout>
       <div className={style.section}>
         <section className={style.section1}>
           <div className={style.title}>
-            <h1>Don't <strong className={style.strong}>Damage</strong> Nature with Your Car</h1>
-            <p>Change Your Old Car to an Electric Car <strong className={style.strong}>Now</strong></p>
-            <small>We Have More than 1.000 Electric Car Available</small>
+            <h1>
+              {t("dont")}
+              <strong className={style.strong}>{t("damage")}</strong>
+              {t("title")}
+            </h1>
+            <p>{t("subtitle")}
+              <strong className={style.strong}>{t("now")}</strong>
+            </p>
+            <small>{t("available")}</small>
             <br />
-            <Button>Contact Us</Button>
+            <Button>{t("contact")}</Button>
           </div>
           <img src={"/image/car.png"} alt="logo" className={style.imageTitle} />
         </section>
         <section className={style.section2}>
           <div className={style.titleSection}>
-            <h1>Why <strong className={style.strong}>Electric </strong> Car ?</h1>
+            <h1> <strong className={style.strong}>{t("why")} </strong></h1>
           </div>
           <div className={style.article}>
             {DataArticle.map((a, i) => {
@@ -59,8 +78,8 @@ export default function Home() {
         </section>
         <section className={style.section3}>
           <div className={style.title}>
-            <h1> <strong className={style.strong}>Why Us ?</strong></h1>
-            <p>Our mission is to provide sustainable and conveniont transportion option to our customers</p>
+            <h1><strong className={style.strong}>{t("whyUs")}</strong></h1>
+            <p>{t("because")}</p>
           </div>
           <div className={style.section3Card}>
             {DataBranding.map((b, i) => {
@@ -75,7 +94,11 @@ export default function Home() {
         </section>
         <section className={style.section4}>
           <div className={style.titleSection}>
-            <h1>Find the<strong className={style.strong}> Best </strong>Deal for You</h1>
+            <h1>
+              {t("findThe")}
+              <strong className={style.strong}> {t("bestDeal")} </strong>
+              {t("forYou")}
+            </h1>
           </div>
           <Carousel showThumbs={false}>
             {DataCarList.map((c, i) => {
@@ -118,7 +141,7 @@ export default function Home() {
         </section>
         <section className={style.section5}>
           <div className={style.titleSection}>
-            <h1>Check<strong className={style.strong}> Shipping Cost </strong></h1>
+            <h1>{t("check")}<strong className={style.strong}> {t("shippingCost")} </strong></h1>
           </div>
           <Form
             listProvince={listProvince}
