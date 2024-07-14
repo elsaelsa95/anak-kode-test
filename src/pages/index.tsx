@@ -8,35 +8,26 @@ import { DataArticle, DataBranding, DataCarList } from "@/data/data";
 import Card from "@/components/Card";
 import RootLayout from "./layout";
 import Form from "@/components/Form";
-import store from "@/redux/store";
-import { dataCost, dataListCity, dataListProvince } from "@/data/rajaongkir";
+import { useEffect, useState } from "react";
+import { formatter } from "@/helper/formatCurrency";
 
-export default function Home({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
-  const formatter = (number: number) => new Intl.NumberFormat('id-ID', {
-    style: "currency",
-    currency: "IDR"
-  }).format(number)
+export interface IProvince {
+  province_id: string;
+  province: string;
+}
 
-  // const province = listProvince.rajaongkir.results
-  // const fromCity = listCityFrom.rajaongkir.results
-  // const toCity = listCityTo.rajaongkir.results
-  // const cost = estimationCost.rajaongkir.results.map((c: any) => {
-  //   return (
-  //     c.costs
-  //   )
-  // })
+export default function Home() {
+  const [listProvince, setListProvince] = useState<IProvince[]>([]);
+  useEffect(() => {
+    const result = fetch("/api/provinces");
 
-  const province = dataListProvince.rajaongkir.results
-  const fromCity = dataListCity.rajaongkir.results
-  const toCity = dataListCity.rajaongkir.results
-  const cost = dataCost.rajaongkir.results.map((c: any) => {
-    return (
-      c.costs
-    )
-  })
+    result
+      .then((res) => res.json())
+      .then((data) => {
+        setListProvince(data.data.rajaongkir.results);
+      });
+  }, []);
 
-  const local = store.getState()
-  console.log(local)
   return (
     <RootLayout>
       <div className={style.section}>
@@ -130,67 +121,10 @@ export default function Home({ listProvince, listCityFrom, listCityTo, estimatio
             <h1>Check<strong className={style.strong}> Shipping Cost </strong></h1>
           </div>
           <Form
-            listProvince={province}
-            listCityFrom={fromCity}
-            listCityTo={toCity}
-            estimationCost={cost}
+            listProvince={listProvince}
           />
         </section>
       </div>
     </RootLayout>
   )
 }
-
-// export const getServerSideProps = async () => {
-//   const local = store.getState()
-//   console.log(local)
-
-//   const getProvince = await fetch(`http://api.rajaongkir.com/starter/province`, {
-//     headers: {
-//       'key': `${process.env.KEY_RAJA_ONGKIR}`
-//     }
-//   })
-//   const listProvince = await getProvince.json()
-
-//   const provinceIDFrom = local.provinceSlice.provinceIDfrom
-//   const getCityFrom = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDFrom}`, {
-//     headers: {
-//       'content-type': "application/x-www-form-urlencoded",
-//       'key': `${process.env.KEY_RAJA_ONGKIR}`
-//     }
-//   })
-//   const listCityFrom = await getCityFrom.json()
-
-//   const provinceIDTo = local.provinceSlice.provinceIDTo
-//   const getCityTo = await fetch(`https://api.rajaongkir.com/starter/city?province=${provinceIDTo}`, {
-//     headers: {
-//       'key': `${process.env.KEY_RAJA_ONGKIR}`
-//     }
-//   })
-//   const listCityTo = await getCityTo.json()
-
-//   const getCost = await fetch(`https://api.rajaongkir.com/starter/cost`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       'key': `${process.env.KEY_RAJA_ONGKIR}`
-//     },
-//     body: JSON.stringify({
-//       "origin": local.citySlice.cityIDFrom,
-//       "destination": local.citySlice.cityIDTo,
-//       "weight": "1700",
-//       "courier": "jne"
-//     })
-//   })
-
-//   const estimationCost = await getCost.json()
-
-//   return {
-//     props: {
-//       listProvince,
-//       listCityFrom,
-//       listCityTo,
-//       estimationCost
-//     }
-//   }
-// }

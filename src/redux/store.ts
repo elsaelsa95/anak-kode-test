@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { citySlice, provinceSlice } from "./costSlice"
+import { citySlice } from "./costSlice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const store = configureStore({
     reducer: {
-        provinceSlice: provinceSlice.reducer,
+        // provinceSlice: provinceSlice.reducer,
         citySlice: citySlice.reducer
     }
 })

@@ -2,41 +2,100 @@
 import { useState } from "react"
 import style from "./style.module.css"
 import Filter from "../Filter"
-import { useAppDispatch } from "@/redux/store"
-import { updateCityIDFrom, updateCityIDTo, updateProvinceIDFrom, updateProvinceIDTo } from "@/redux/costSlice"
+import Button from "../Button";
+import { formatter } from "@/helper/formatCurrency";
+export interface IListCity {
+    province_id: string;
+    city_id: string;
+    province: string;
+    type: string;
+    city_name: string;
+}
 
-export default function Form({ listProvince, listCityFrom, listCityTo, estimationCost }: any) {
-    const [openProvinceFrom, setOpenProvinceFrom] = useState(false)
-    const [provinceIDFrom, setProvinceIDFrom] = useState("")
-    const [provinceFrom, setProvinceFrom] = useState("")
+export interface ICost {
+    code: string;
+    name: string;
+    costs: ICostDetail[];
+}
 
-    const [showFromCityForm, setShowFromCityForm] = useState(false)
-    const [openCityFrom, setOpenCityFrom] = useState(false)
-    const [cityIDFrom, setCityIDFrom] = useState("")
-    const [cityFrom, setCityFrom] = useState("")
+export interface ICostDetail {
+    service: string;
+    description: string;
+    cost: ICostDescription[];
+}
 
-    const [openProvinceTo, setOpenProvinceTo] = useState(false)
-    const [provinceIDTo, setProvinceIDTo] = useState("")
-    const [provinceTo, setProvinceTo] = useState("")
+export interface ICostDescription {
+    value: string;
+    etd: string;
+    note: string;
+}
 
-    const [showToCityForm, setShowToCityForm] = useState(false)
-    const [openCityTo, setOpenCityTo] = useState(false)
-    const [cityIDTo, setCityIDTo] = useState("")
-    const [cityTo, setCityTo] = useState("")
+export default function Form({ listProvince }: any) {
+    const [openProvinceFrom, setOpenProvinceFrom] = useState(false);
+    const [provinceFrom, setProvinceFrom] = useState("");
 
-    const dispatch = useAppDispatch()
+    const [showFromCityForm, setShowFromCityForm] = useState(false);
+    const [openCityFrom, setOpenCityFrom] = useState(false);
+    const [cityFrom, setCityFrom] = useState("");
 
-    const updateFromProvince = (id: string) => {
-        dispatch(updateProvinceIDFrom(id))
+    const [openProvinceTo, setOpenProvinceTo] = useState(false);
+    const [provinceTo, setProvinceTo] = useState("");
+
+    const [showToCityForm, setShowToCityForm] = useState(false);
+    const [openCityTo, setOpenCityTo] = useState(false);
+    const [cityTo, setCityTo] = useState("");
+
+    const [listFromCity, setFromCity] = useState<IListCity[]>([]);
+    const handleChangeFromProvince = (id: string) => {
+        const reqCity = fetch(`/api/city/${id}`);
+        reqCity
+            .then((res) => res.json())
+            .then((res) => {
+                setFromCity(res.data.rajaongkir.results);
+            });
+    };
+
+    const [listToCity, setToCity] = useState<IListCity[]>([]);
+    const handleChangeToProvince = (id: string) => {
+        const reqCity = fetch(`/api/city/${id}`);
+        reqCity
+            .then((res) => res.json())
+            .then((res) => {
+                setToCity(res.data.rajaongkir.results);
+            });
+    };
+
+    let fromCity_id: any
+    let toCity_id: any
+
+    if (typeof window !== 'undefined') {
+        fromCity_id = localStorage.getItem("fromCity_id") ? localStorage.getItem("fromCity_id") : ""
+        toCity_id = localStorage.getItem("toCity_id") ? localStorage.getItem("toCity_id") : ""
     }
-    const updateFromCity = (id: string) => {
-        dispatch(updateCityIDFrom(id))
-    }
-    const updateToProvince = (id: string) => {
-        dispatch(updateProvinceIDTo(id))
-    }
-    const updateToCity = (id: string) => {
-        dispatch(updateCityIDTo(id))
+
+    const [cost, setCost] = useState<ICost[]>([])
+    const checkCost = async () => {
+        try {
+            const localStorageData = {
+                origin: fromCity_id,
+                destination: toCity_id,
+                weight: "2700",
+                courier: "jne",
+            }
+            const result = await fetch('api/cost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ localStorageData }),
+            })
+            const res = await result.json()
+            setCost(res.data.rajaongkir.results[0].costs)
+            setShowFromCityForm(!showFromCityForm)
+            setShowToCityForm(!showToCityForm)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -54,13 +113,12 @@ export default function Form({ listProvince, listCityFrom, listCityTo, estimatio
                                     key={i}
                                     className={style.option}
                                     onClick={() => {
-                                        setProvinceIDFrom(p.province_id)
-                                        setProvinceFrom(p.province)
-                                        setOpenProvinceFrom(!openProvinceFrom)
-                                        setShowFromCityForm(!showFromCityForm)
-                                        localStorage.setItem("provinceIDFrom", p.province_id)
-                                        updateFromProvince(p.province_id)
-                                    }}>{p.province}
+                                        setProvinceFrom(p.province);
+                                        setOpenProvinceFrom(!openProvinceFrom);
+                                        setShowFromCityForm(!showFromCityForm);
+                                        handleChangeFromProvince(p.province_id);
+                                    }}
+                                >{p.province}
                                 </li>
                             </ul>
                         )
@@ -71,19 +129,18 @@ export default function Form({ listProvince, listCityFrom, listCityTo, estimatio
                         onClick={() => setOpenCityFrom(!openCityFrom)}
                         label={cityFrom ? cityFrom : "Choose City"}
                         open={openCityFrom}>
-                        {listCityFrom.map((c: any, i: any) => {
+                        {listFromCity.map((c: any, i: any) => {
                             return (
                                 <ul key={i}>
                                     <li
                                         key={i}
                                         className={style.option}
                                         onClick={() => {
-                                            setCityIDFrom(c.city_id)
-                                            setCityFrom(c.city_name)
-                                            setOpenCityFrom(!openCityFrom)
-                                            localStorage.setItem("cityIIDFrom", c.city_id)
-                                            updateFromCity(c.city_id)
-                                        }}>{c.city_name}
+                                            setCityFrom(c.city_name);
+                                            setOpenCityFrom(!openCityFrom);
+                                            localStorage.setItem("fromCity_id", c.city_id);
+                                        }}
+                                    >{c.city_name}
                                     </li>
                                 </ul>
                             )
@@ -104,13 +161,12 @@ export default function Form({ listProvince, listCityFrom, listCityTo, estimatio
                                     key={i}
                                     className={style.option}
                                     onClick={() => {
-                                        setProvinceIDTo(p.province_id)
-                                        setProvinceTo(p.province)
-                                        setOpenProvinceTo(!openProvinceTo)
-                                        setShowToCityForm(!showToCityForm)
-                                        localStorage.setItem("provinceIDTo", p.province_id)
-                                        updateToProvince(p.province_id)
-                                    }}>{p.province}
+                                        setProvinceTo(p.province);
+                                        setOpenProvinceTo(!openProvinceTo);
+                                        setShowToCityForm(!showToCityForm);
+                                        handleChangeToProvince(p.province_id);
+                                    }}
+                                >{p.province}
                                 </li>
                             </ul>
                         )
@@ -121,46 +177,52 @@ export default function Form({ listProvince, listCityFrom, listCityTo, estimatio
                         onClick={() => setOpenCityTo(!openCityTo)}
                         label={cityTo ? cityTo : "Choose City"}
                         open={openCityTo}>
-                        {listCityTo.map((c: any, i: any) => {
+                        {listToCity.map((c: any, i: any) => {
                             return (
                                 <ul key={i}>
                                     <li
                                         key={i}
                                         className={style.option}
                                         onClick={() => {
-                                            setCityIDTo(c.city_id)
-                                            setCityTo(c.city_name)
-                                            setOpenCityTo(!openCityTo)
-                                            localStorage.setItem("cityIDTo", c.city_id)
-                                            updateToCity(c.city_id)
-                                        }}>{c.city_name}
+                                            setCityTo(c.city_name);
+                                            setOpenCityTo(!openCityTo);
+                                            localStorage.setItem("toCity_id", c.city_id);
+                                        }}
+                                    >{c.city_name}
                                     </li>
                                 </ul>
                             )
                         })}
                     </Filter> : <></>}
             </div>
-            <div className={style.count}>
-                <strong className={style.strong}>Estimation</strong>
-                <div className={style.result}>
-                    {estimationCost[0].map((c: any, i: any) => {
-                        return (
-                            <div key={i}>
-                                <p>Service : {c.service}</p>
-                                <p>Description: {c.description}</p>
-                                {c.cost.map((c: any, i: any) => {
-                                    return (
-                                        <div key={i}>
-                                            <p> Estimation Cost : {c.value}</p>
-                                            <p> Estimation ETD : {c.etd}</p>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+
+            {cost ?
+                <div className={style.count}>
+                    <strong className={style.strong}>Estimation</strong>
+                    <div className={style.result}>
+                        {cost.map((c: any, i: any) => {
+                            return (
+                                <div key={i}>
+                                    <p>Service : {c.service}</p>
+                                    <p>Description: {c.description}</p>
+                                    {c.cost.map((c: any, i: any) => {
+                                        return (
+                                            <div key={i}>
+                                                <p> Estimation Cost : {formatter(c.value)}</p>
+                                                <p> Estimation ETD : {c.etd}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div> : <></>
+            }
+            <p><strong>*Estimation Car Weight = 2.700 kg</strong></p>
+            <p><strong>*Service Available = JNE</strong>
+            </p>
+            <Button onClick={() => checkCost()}>Check</Button>
         </div>
     )
 }
