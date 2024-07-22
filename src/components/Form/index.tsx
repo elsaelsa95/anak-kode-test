@@ -52,6 +52,7 @@ export default function Form({ listProvince }: any) {
             .then((res) => {
                 setFromCity(res.data.rajaongkir.results);
                 localStorage.removeItem("fromCity_id")
+                setCost([])
             });
     };
 
@@ -63,6 +64,7 @@ export default function Form({ listProvince }: any) {
             .then((res) => {
                 setToCity(res.data.rajaongkir.results);
                 localStorage.removeItem("toCity_id")
+                setCost([])
             });
     };
 
