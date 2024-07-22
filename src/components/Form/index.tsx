@@ -222,7 +222,7 @@ export default function Form({ listProvince }: any) {
                 {fromCity_id && toCity_id ?
                     <Button onClick={() => checkCost()}>{t("checkCost")}</Button> :
                     <>
-                        <p className={style.warning}>*Please Input City</p>
+                        <p className={style.warning}>*{t("inputCity")}</p>
                         <Button className={style.buttonOff}>{t("checkCost")}</Button>
 
                     </>}
