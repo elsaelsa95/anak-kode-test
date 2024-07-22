@@ -216,7 +216,15 @@ export default function Form({ listProvince }: any) {
             <p><strong>{t("carWeight")}</strong></p>
             <p><strong>{t("courier")}</strong>
             </p>
-            <Button onClick={() => checkCost()}>{t("checkCost")}</Button>
+            <div>
+                {fromCity_id && toCity_id ?
+                    <Button onClick={() => checkCost()}>{t("checkCost")}</Button> :
+                    <>
+                        <p className={style.warning}>*Please Input City</p>
+                        <Button className={style.buttonOff}>{t("checkCost")}</Button>
+
+                    </>}
+            </div>
         </div>
     )
 }
