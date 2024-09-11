@@ -40,7 +40,8 @@ i18n.use(initReactI18next).init({
                 courier: "*Service Available = JNE ",
                 checkCost: "Check ",
                 findUs: "Find Us ",
-                contactUs: "Contact Us "
+                contactUs: "Contact Us ",
+                inputCity: "Please Input City"
             },
         },
         ind: {
@@ -74,7 +75,8 @@ i18n.use(initReactI18next).init({
                 courier: "*Layanan Tersedia = JNE ",
                 checkCost: "Cek Tarif ",
                 findUs: "Termukan Kami ",
-                contactUs: "Hubungi Kami "
+                contactUs: "Hubungi Kami ",
+                inputCity: "Pilih Kota Terlebih Dahulu"
             },
         },
     },

@@ -35,14 +35,12 @@ export default function Form({ listProvince }: any) {
     const [openProvinceFrom, setOpenProvinceFrom] = useState(false);
     const [provinceFrom, setProvinceFrom] = useState("");
 
-    const [showFromCityForm, setShowFromCityForm] = useState(false);
     const [openCityFrom, setOpenCityFrom] = useState(false);
     const [cityFrom, setCityFrom] = useState("");
 
     const [openProvinceTo, setOpenProvinceTo] = useState(false);
     const [provinceTo, setProvinceTo] = useState("");
 
-    const [showToCityForm, setShowToCityForm] = useState(false);
     const [openCityTo, setOpenCityTo] = useState(false);
     const [cityTo, setCityTo] = useState("");
 
@@ -53,6 +51,8 @@ export default function Form({ listProvince }: any) {
             .then((res) => res.json())
             .then((res) => {
                 setFromCity(res.data.rajaongkir.results);
+                localStorage.removeItem("fromCity_id")
+                setCost([])
             });
     };
 
@@ -63,6 +63,8 @@ export default function Form({ listProvince }: any) {
             .then((res) => res.json())
             .then((res) => {
                 setToCity(res.data.rajaongkir.results);
+                localStorage.removeItem("toCity_id")
+                setCost([])
             });
     };
 
@@ -92,8 +94,6 @@ export default function Form({ listProvince }: any) {
             })
             const res = await result.json()
             setCost(res.data.rajaongkir.results[0].costs)
-            setShowFromCityForm(!showFromCityForm)
-            setShowToCityForm(!showToCityForm)
         } catch (error) {
             console.log(error)
         }
@@ -117,7 +117,6 @@ export default function Form({ listProvince }: any) {
                                     onClick={() => {
                                         setProvinceFrom(p.province);
                                         setOpenProvinceFrom(!openProvinceFrom);
-                                        setShowFromCityForm(!showFromCityForm);
                                         handleChangeFromProvince(p.province_id);
                                     }}
                                 >{p.province}
@@ -126,29 +125,27 @@ export default function Form({ listProvince }: any) {
                         )
                     })}
                 </Filter>
-                {showFromCityForm ?
-                    <Filter
-                        onClick={() => setOpenCityFrom(!openCityFrom)}
-                        label={cityFrom ? cityFrom : t("chooseCity")}
-                        open={openCityFrom}>
-                        {listFromCity.map((c: any, i: any) => {
-                            return (
-                                <ul key={i}>
-                                    <li
-                                        key={i}
-                                        className={style.option}
-                                        onClick={() => {
-                                            setCityFrom(c.city_name);
-                                            setOpenCityFrom(!openCityFrom);
-                                            localStorage.setItem("fromCity_id", c.city_id);
-                                        }}
-                                    >{c.city_name}
-                                    </li>
-                                </ul>
-                            )
-                        })}
-                    </Filter> : <></>
-                }
+                <Filter
+                    onClick={() => setOpenCityFrom(!openCityFrom)}
+                    label={fromCity_id ? cityFrom : t("chooseCity")}
+                    open={openCityFrom}>
+                    {listFromCity.map((c: any, i: any) => {
+                        return (
+                            <ul key={i}>
+                                <li
+                                    key={i}
+                                    className={style.option}
+                                    onClick={() => {
+                                        setCityFrom(c.city_name);
+                                        setOpenCityFrom(!openCityFrom);
+                                        localStorage.setItem("fromCity_id", c.city_id);
+                                    }}
+                                >{c.city_name}
+                                </li>
+                            </ul>
+                        )
+                    })}
+                </Filter>
             </div>
             <div className={style.to}>
                 <strong className={style.strong}>{t("to")}</strong>
@@ -165,7 +162,6 @@ export default function Form({ listProvince }: any) {
                                     onClick={() => {
                                         setProvinceTo(p.province);
                                         setOpenProvinceTo(!openProvinceTo);
-                                        setShowToCityForm(!showToCityForm);
                                         handleChangeToProvince(p.province_id);
                                     }}
                                 >{p.province}
@@ -174,30 +170,28 @@ export default function Form({ listProvince }: any) {
                         )
                     })}
                 </Filter>
-                {showToCityForm ?
-                    <Filter
-                        onClick={() => setOpenCityTo(!openCityTo)}
-                        label={cityTo ? cityTo : t("chooseCity")}
-                        open={openCityTo}>
-                        {listToCity.map((c: any, i: any) => {
-                            return (
-                                <ul key={i}>
-                                    <li
-                                        key={i}
-                                        className={style.option}
-                                        onClick={() => {
-                                            setCityTo(c.city_name);
-                                            setOpenCityTo(!openCityTo);
-                                            localStorage.setItem("toCity_id", c.city_id);
-                                        }}
-                                    >{c.city_name}
-                                    </li>
-                                </ul>
-                            )
-                        })}
-                    </Filter> : <></>}
+                <Filter
+                    onClick={() => setOpenCityTo(!openCityTo)}
+                    label={toCity_id ? cityTo : t("chooseCity")}
+                    open={openCityTo}>
+                    {listToCity.map((c: any, i: any) => {
+                        return (
+                            <ul key={i}>
+                                <li
+                                    key={i}
+                                    className={style.option}
+                                    onClick={() => {
+                                        setCityTo(c.city_name);
+                                        setOpenCityTo(!openCityTo);
+                                        localStorage.setItem("toCity_id", c.city_id);
+                                    }}
+                                >{c.city_name}
+                                </li>
+                            </ul>
+                        )
+                    })}
+                </Filter>
             </div>
-
             {cost ?
                 <div className={style.count}>
                     <strong className={style.strong}>{t("estimation")}</strong>
@@ -224,7 +218,15 @@ export default function Form({ listProvince }: any) {
             <p><strong>{t("carWeight")}</strong></p>
             <p><strong>{t("courier")}</strong>
             </p>
-            <Button onClick={() => checkCost()}>{t("checkCost")}</Button>
+            <div>
+                {fromCity_id && toCity_id ?
+                    <Button onClick={() => checkCost()}>{t("checkCost")}</Button> :
+                    <>
+                        <p className={style.warning}>*{t("inputCity")}</p>
+                        <Button className={style.buttonOff}>{t("checkCost")}</Button>
+
+                    </>}
+            </div>
         </div>
     )
 }
