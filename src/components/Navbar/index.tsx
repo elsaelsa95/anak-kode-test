@@ -21,20 +21,20 @@ export default function Navbar() {
     return (
         <div className={style.header} data-is-open={isOpenMobileNav}>
             <nav className={style.container}>
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                     icon={faBars}
                     className={style.mobileBars}
                     onClick={(_) => setIsOpenMobileNav((prev) => !prev)}
-                />
+                /> */}
                 <Link href={"/"} className={style.navLogo}>
                     <img src="../image/leaf.png" alt="logo" className={style.logo} />
                 </Link>
-                <div className={style.navigation}>
+                {/* <div className={style.navigation}>
                     <Navigation
                         isOpen={isOpenMobileNav}
                         onClick={(_) => setIsOpenMobileNav(false)}
                     />
-                </div>
+                </div> */}
                 <select
                     defaultValue={"es"}
                     onChange={onChangeLang}
